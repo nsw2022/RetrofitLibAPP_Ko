@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#B5EAF1"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="서울시 도서관 찾기!"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:textSize="24sp"/>
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="구명을 선택해주세요"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:layout_below="@+id/tv"/>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv2"
+        android:entries="@array/city"
+        android:spinnerMode="dropdown"
+        android:padding="8dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
+        android:layout_weight="1"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_serach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/bg_button_round"
+        android:text="검색"
+        android:padding="8dp"/>
+
+</LinearLayout>
