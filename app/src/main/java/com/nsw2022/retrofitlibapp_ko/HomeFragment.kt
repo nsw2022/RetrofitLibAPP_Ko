@@ -26,18 +26,6 @@ class HomeFragment: Fragment() {
     lateinit var home_spinner:Spinner
     lateinit var gu_arrays:Array<String>
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-    }
-
-
-
-    //화면을 만들기 전에 보여줄 데이터를 읽어오는 등의 작업을 수행하는 메소드
-   override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     // 뷰가 만들어질때
     override fun onCreateView(
@@ -45,10 +33,25 @@ class HomeFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        inflater.inflate(R.layout.fragment_home,container,false)
-        //val view = inflater.inflate(R.layout.fragment_home,container,false)
 
         val binding= FragmentHomeBinding.inflate(inflater,container,false)
+
+
+        var gu : String? = null
+        var gu_arrays:Array<String> = resources.getStringArray(R.array.city)
+
+        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                gu=gu_arrays[p2]
+                //Toast.makeText(requireContext(), ""+gu, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+
+        }
+
+
         binding.btnSerach.setOnClickListener {
             val retrofit:Retrofit=Retrofit.Builder()
                 .baseUrl(SeoulOpenApi.DOMAIN)
@@ -63,6 +66,7 @@ class HomeFragment: Fragment() {
                 .enqueue(object : Callback<LibApiItem>{
                     override fun onResponse(call: Call<LibApiItem>, response: Response<LibApiItem>) {
                         val apiReonse:LibApiItem?=response.body()
+
                         var adapter=RecyclerAdapter(requireContext(),apiReonse!!.SeoulLibraryTimeInfo.row)
                         binding.recyclerHome.adapter=adapter
 
@@ -95,22 +99,6 @@ class HomeFragment: Fragment() {
 
         return binding.root
     }
-
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-
-
-
-
-
-
-    }//onViewCreated
-
-
 
 
 }
