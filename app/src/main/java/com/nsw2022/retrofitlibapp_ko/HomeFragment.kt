@@ -47,11 +47,15 @@ class HomeFragment: Fragment() {
 //        inflater.inflate(R.layout.fragment_home,container,false)
         val view = inflater.inflate(R.layout.fragment_home,container,false)
 
-
+/*
         items.add( RecyclerItem("도서관","강남구","서울시 강남구","2022-01-02","02-1234-5678") )
         items.add( RecyclerItem("홍길동","동대문구","서울시 강남구","2022-01-02","02-1234-5678") )
         items.add( RecyclerItem("글자수가몇개까지일까요제한을뒀답니다~","강서구","서울시 강남구","2022-01-02","02-1234-5678") )
         items.add( RecyclerItem("짜파게티","강남구","서울시 강남구","2022-01-02","02-1234-5678") )
+
+ */
+
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_home)
         val adapter = RecyclerAdapter(requireContext(),items)
         recyclerView.adapter=adapter
