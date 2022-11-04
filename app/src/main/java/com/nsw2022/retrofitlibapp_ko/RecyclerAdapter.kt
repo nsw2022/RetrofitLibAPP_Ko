@@ -6,35 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.nsw2022.retrofitlibapp_ko.databinding.RecycelrItemBinding
 
-class RecyclerAdapter constructor(val context: Context,var items:MutableList<RecyclerItem>): RecyclerView.Adapter<RecyclerAdapter.VH>(){
-
-
-    inner class VH constructor(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val tvNameLib:TextView by lazy { itemView.findViewById(R.id.tv_name_lib) }
-        val tvGuaddressLib:TextView by lazy { itemView.findViewById(R.id.tv_guaddress_lib) }
-        val tvAddress:TextView by lazy { itemView.findViewById(R.id.tv_address_lib) }
-        val tvHolidayLib:TextView by lazy { itemView.findViewById(R.id.tv_holiday_lib) }
-        val tvTelLib:TextView by lazy { itemView.findViewById(R.id.tv_tel_lib) }
+class RecyclerAdapter constructor(var context: Context,var items:MutableList<RecyclerItem>): RecyclerView.Adapter<RecyclerAdapter.VH>(){
+    inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
+        val binding:RecycelrItemBinding = RecycelrItemBinding.bind(itemView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val layoutInflater:LayoutInflater=LayoutInflater.from(context)
-        var itemView:View= layoutInflater.inflate(R.layout.recycelr_item,parent,false)
+        val itemView:View=LayoutInflater.from(context).inflate(R.layout.recycelr_item,parent,false)
         return VH(itemView)
-
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        val item:RecyclerItem=items.get(position)
-
-        holder.tvNameLib.text=item.LBRRY_NAME
-        holder.tvGuaddressLib.text=item.CODE_VALUE
-        holder.tvAddress.text=item.ADRES
-        holder.tvHolidayLib.text=item.FDRM_CLOSE_DATE
-        holder.tvTelLib.text=item.TEL_NOL
+        holder.binding.tvNameLib.text=items[position].LBRRY_NAME
+        holder.binding.tvGuaddressLib.text=items[position].CODE_VALUE
+        holder.binding.tvHolidayLib.text=items[position].FDRM_CLOSE_DATE
+        holder.binding.tvTelLib.text=items[position].TEL_NOL
+        holder.binding.tvAddressLib.text=items[position].ADRES
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int =items.size
 
 }
