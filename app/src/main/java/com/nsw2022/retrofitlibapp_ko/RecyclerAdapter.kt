@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nsw2022.retrofitlibapp_ko.databinding.RecycelrItemBinding
@@ -24,6 +25,16 @@ class RecyclerAdapter constructor(var context: Context,var items:MutableList<Row
         holder.binding.tvHolidayLib.text=items[position].FDRM_CLOSE_DATE
         holder.binding.tvTelLib.text=items[position].TEL_NO
         holder.binding.tvAddressLib.text=items[position].ADRES
+
+
+
+        holder.binding.tbFav.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener{
+            override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
+
+            }
+
+        })
+
     }
 
     override fun getItemCount(): Int =items.size

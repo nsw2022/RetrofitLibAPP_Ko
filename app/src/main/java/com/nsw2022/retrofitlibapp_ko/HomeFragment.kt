@@ -24,8 +24,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 class HomeFragment: Fragment() {
 
     lateinit var binding:FragmentHomeBinding
-    lateinit var home_spinner:Spinner
-    lateinit var gu_arrays:Array<String>
+
 
 
 
@@ -47,8 +46,6 @@ class HomeFragment: Fragment() {
         items.add( RecyclerItem("글자수가몇개까지일까요제한을뒀답니다~","강서구","서울시 강남구","2022-01-02","02-1234-5678") )
         items.add( RecyclerItem("짜파게티","강남구","서울시 강남구","2022-01-02","02-1234-5678") )
 
- */
-/*
        더미테스트
        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_home)
        val adapter = RecyclerAdapter(requireContext(),items)
@@ -104,7 +101,7 @@ class HomeFragment: Fragment() {
                         }
 
                         //Toast.makeText(requireContext(), "$gu", Toast.LENGTH_SHORT).show()
-                        Toast.makeText(requireContext(), "${apiReonse?.SeoulLibraryTimeInfo?.row?.size}\n${items.size}",
+                        Toast.makeText(requireContext(), "${items.size}",
                             Toast.LENGTH_SHORT).show()
 
                         binding.recyclerHome.adapter= RecyclerAdapter(requireContext(), items)
