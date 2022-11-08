@@ -2,6 +2,7 @@ package com.nsw2022.retrofitlibapp_ko
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,8 @@ class HomeFragment: Fragment() {
     lateinit var gu_arrays:Array<String>
 
 
+
+
     // 뷰가 만들어질때
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,50 +37,7 @@ class HomeFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding= FragmentHomeBinding.inflate(inflater,container,false)
-
-
-        var gu : String? = null
-        var gu_arrays:Array<String> = resources.getStringArray(R.array.city)
-
-        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                gu=gu_arrays[p2]
-                //Toast.makeText(requireContext(), ""+gu, Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-
-        }
-
-
-        binding.btnSerach.setOnClickListener {
-            val retrofit:Retrofit=Retrofit.Builder()
-                .baseUrl(SeoulOpenApi.DOMAIN)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-            // 레트로핏 서비스로부터 원하는 설계(인터페이스) 하고나서 객체 생성
-            val retrofitService = retrofit.create(LibApiRetrofitService::class.java)
-
-            retrofitService.getAPILibDatas(SeoulOpenApi.KEY)
-                .enqueue(object : Callback<LibApiItem>{
-                    override fun onResponse(call: Call<LibApiItem>, response: Response<LibApiItem>) {
-                        val apiReonse:LibApiItem?=response.body()
-
-                        var adapter=RecyclerAdapter(requireContext(),apiReonse!!.SeoulLibraryTimeInfo.row)
-                        binding.recyclerHome.adapter=adapter
-
-                    }
-
-                    override fun onFailure(call: Call<LibApiItem>, t: Throwable) {
-                        Toast.makeText(requireContext(), "error:${t.message}", Toast.LENGTH_SHORT).show()
-                    }
-
-                })
-        }
+        binding= FragmentHomeBinding.inflate(inflater,container,false)
 
 
 /*
@@ -100,7 +60,67 @@ class HomeFragment: Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+
+
+        var gu : String = "강남구"
+        var gu_arrays:Array<String> = resources.getStringArray(R.array.city)
+
+        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                gu=gu_arrays[p2]
+                //Toast.makeText(requireContext(), ""+gu, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+
+        }
+
+        binding.btnSerach.setOnClickListener {
+            val retrofit:Retrofit=Retrofit.Builder()
+                .baseUrl(SeoulOpenApi.DOMAIN)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            // 레트로핏 서비스로부터 원하는 설계(인터페이스) 하고나서 객체 생성
+            val retrofitService = retrofit.create(LibApiRetrofitService::class.java)
+
+            retrofitService.getAPILibDatas(SeoulOpenApi.KEY)
+                .enqueue(object : Callback<LibApiItem>{
+                    override fun onResponse(call: Call<LibApiItem>, response: Response<LibApiItem>) {
+                        val apiReonse:LibApiItem?=response.body()
+                        //var adapter=RecyclerAdapter(requireContext(),apiReonse!!.SeoulLibraryTimeInfo.row)
+                        //binding.recyclerHome.adapter=adapter
+
+                        var items:MutableList<Row> = mutableListOf() //빈 리스트.. 리사이클러뷰가 보여줄 데이터들..
+
+                        apiReonse?.SeoulLibraryTimeInfo?.row?.forEach {
+                            Log.i("TAG", it.CODE_VALUE +" , " + gu)
+                            if(it.CODE_VALUE == gu) items.add(it)
+                        }
+
+                        //Toast.makeText(requireContext(), "$gu", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "${apiReonse?.SeoulLibraryTimeInfo?.row?.size}\n${items.size}",
+                            Toast.LENGTH_SHORT).show()
+
+                        binding.recyclerHome.adapter= RecyclerAdapter(requireContext(), items)
+
+                    }
+
+                    override fun onFailure(call: Call<LibApiItem>, t: Throwable) {
+                        Toast.makeText(requireContext(), "error:${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+
+                })
+        }
+
+
+
+    }
 }
 
 
