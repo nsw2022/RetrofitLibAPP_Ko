@@ -1,14 +1,22 @@
 package com.nsw2022.retrofitlibapp_ko
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.Activity.MODE_PRIVATE
 import android.content.Context
+import android.content.Intent
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteDatabase.openOrCreateDatabase
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.internal.ContextUtils.getActivity
 import com.nsw2022.retrofitlibapp_ko.databinding.RecycelrItemBinding
 
 class RecyclerAdapter constructor(var context: Context,var items:MutableList<Row>): RecyclerView.Adapter<RecyclerAdapter.VH>(){
@@ -17,9 +25,11 @@ class RecyclerAdapter constructor(var context: Context,var items:MutableList<Row
     }
 
 
-    lateinit var favDB: FavDB
+  //  val favDB: FavDB by lazy { FavDB(context) }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val itemView:View=LayoutInflater.from(context).inflate(R.layout.recycelr_item,parent,false)
+
+
 
         return VH(itemView)
     }
@@ -37,17 +47,10 @@ class RecyclerAdapter constructor(var context: Context,var items:MutableList<Row
         holder.binding.tbFav.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener{
             override fun onCheckedChanged(comButton: CompoundButton?, isCheck: Boolean) {
                 if (isCheck){
+                    var addDataFav:MutableList<FavRecycelrItem> = mutableListOf()
 
-                    favDB= FavDB(context)
-                    var item_title=items[position].LBRRY_NAME
-                    var item_add=items[position].ADRES
-                    var item_hoilday=items[position].FDRM_CLOSE_DATE
-                    var item_gu=items[position].CODE_VALUE
-                    var item_tel=items[position].TEL_NO
-                    var item_fstaus="1"
-                    var item_seq_no=items[position].LBRRY_SEQ_NO
-                    favDB.insertIntoTheDatabase(item_title,item_add,item_hoilday,item_gu,item_tel,item_fstaus,item_seq_no)
-
+                    addDataFav.add(FavRecycelrItem(items[position].LBRRY_NAME,items[position].CODE_VALUE,items[position].ADRES,items[position].FDRM_CLOSE_DATE,items[position].TEL_NO))
+                    Toast.makeText(context, "추가 됐답니다~", Toast.LENGTH_SHORT).show()
 
                 }else{
 

@@ -19,11 +19,21 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding:ActivityMainBinding
 
+    var homeFragment:HomeFragment?=null
+    var favFragment:FavoriteFragment?=null
+    var locationFragment:LocationFragment?=null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initBottomNavigation()
+
+    }
+
+    fun initBottomNavigation(){
         supportFragmentManager.beginTransaction().add(R.id.fragment_container,HomeFragment()).commit()
 
         binding.bnv.setOnItemSelectedListener { item ->
@@ -46,9 +56,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-
-
     }
 }
 
