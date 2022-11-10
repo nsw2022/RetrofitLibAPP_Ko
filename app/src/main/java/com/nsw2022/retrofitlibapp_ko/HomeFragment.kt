@@ -1,6 +1,7 @@
 package com.nsw2022.retrofitlibapp_ko
 
 import android.content.Context
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -96,7 +97,7 @@ class HomeFragment: Fragment() {
                         var items:MutableList<Row> = mutableListOf() //빈 리스트.. 리사이클러뷰가 보여줄 데이터들..
 
                         apiReonse?.SeoulLibraryTimeInfo?.row?.forEach {
-                            Log.i("TAG", it.CODE_VALUE +" , " + gu)
+                            //Log.i("TAG", it.CODE_VALUE +" , " + gu)
                             if(it.CODE_VALUE == gu) items.add(it)
                         }
 

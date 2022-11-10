@@ -16,5 +16,8 @@ data class Row constructor(
     val LBRRY_NAME: String,
     val TEL_NO: String,
     val XCNTS: String,
-    val YDNTS: String
+    val YDNTS: String,
+    val LBRRY_SEQ_NO: String
+
+
 )
