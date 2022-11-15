@@ -1,6 +1,7 @@
 package com.nsw2022.retrofitlibapp_ko
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,8 @@ class FavRecyclerAdapter constructor(var context: Context,var items:MutableList<
         holder.binding.tvHolidayLib.text=items[position].FDRM_CLOSE_DATE
         holder.binding.tvTelLib.text=items[position].TEL_NOL
         holder.binding.tvNameLib.text=items[position].LBRRY_NAME
+
+
     }
 
     override fun getItemCount(): Int = items.size

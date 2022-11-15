@@ -27,6 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 카카오 맵 네이티브 키 : 카카오 개발자 사이트에서 키 발급      -->
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="a42c523bacfc4150961ae4dd62ca9219"/>
+
     </application>
 
 </manifest>

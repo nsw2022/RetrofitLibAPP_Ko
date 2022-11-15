@@ -25,7 +25,7 @@ class RecyclerAdapter constructor(var context: Context,var items:MutableList<Row
     }
 
 
-  //  val favDB: FavDB by lazy { FavDB(context) }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val itemView:View=LayoutInflater.from(context).inflate(R.layout.recycelr_item,parent,false)
 
@@ -47,10 +47,10 @@ class RecyclerAdapter constructor(var context: Context,var items:MutableList<Row
         holder.binding.tbFav.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener{
             override fun onCheckedChanged(comButton: CompoundButton?, isCheck: Boolean) {
                 if (isCheck){
-                    var addDataFav:MutableList<FavRecycelrItem> = mutableListOf()
 
-                    addDataFav.add(FavRecycelrItem(items[position].LBRRY_NAME,items[position].CODE_VALUE,items[position].ADRES,items[position].FDRM_CLOSE_DATE,items[position].TEL_NO))
-                    Toast.makeText(context, "추가 됐답니다~", Toast.LENGTH_SHORT).show()
+                    //val db: SQLiteDatabase = FavDB(context).writableDatabase
+
+
 
                 }else{
 
