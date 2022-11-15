@@ -47,74 +47,21 @@ class LocationFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
+
+
         var mapView=MapView(requireContext())
         var mapContainer=view.findViewById<ViewGroup>(R.id.map_container)
         mapContainer.addView(mapView)
 
 
 
-        binding.btnUserLocation.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= 23){
-                val permissionReuslt = TedPermission.create().setPermissions(
-                    android.Manifest.permission.INTERNET,
-                    android.Manifest.permission.ACCESS_FINE_LOCATION,
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION
-                )
-                    //.setRationaleMessage("위치 정보 제공이 필요한 서비스입니다")
-                    .setPermissionListener(object : PermissionListener{
-                        override fun onPermissionGranted() {
-                            // 사용자의 위치로 가기
-                            mapView.currentLocationTrackingMode=MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading
-                            var marker=MapPOIItem()
 
-                            // 열린데이터광장 데이터 파싱
-                            val retrofit: Retrofit = Retrofit.Builder()
-                                .baseUrl(SeoulOpenApi.DOMAIN)
-                                .addConverterFactory(ScalarsConverterFactory.create())
-                                .addConverterFactory(GsonConverterFactory.create())
-                                .build()
 
-                            val retrofitService = retrofit.create(LibApiRetrofitService::class.java)
 
-                            retrofitService.getAPILibDatas(SeoulOpenApi.KEY)
-                                .enqueue(object : Callback<LibApiItem>{
-                                    override fun onResponse(
-                                        call: Call<LibApiItem>,
-                                        response: Response<LibApiItem>
-                                    ) {
-                                        val apiReonse:LibApiItem?=response.body()
 
-                                        apiReonse?.SeoulLibraryTimeInfo?.row?.forEach {
-                                            marker.itemName="${it.LBRRY_NAME}\n${it.FDRM_CLOSE_DATE}"
-                                            marker.mapPoint= MapPoint.mapPointWithGeoCoord(it.XCNTS.toDouble(),it.YDNTS.toDouble())
-                                            marker.markerType=MapPOIItem.MarkerType.RedPin
-                                            marker.selectedMarkerType=MapPOIItem.MarkerType.YellowPin
-                                            mapView.addPOIItem(marker)
-                                            //Log.d("TEST","${it.LBRRY_NAME}")
 
-                                        }
-
-                                    }
-
-                                    override fun onFailure(call: Call<LibApiItem>, t: Throwable) {
-                                        TODO("Not yet implemented")
-                                    }
-
-                                })
-
-                        }
-
-                        override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
-                            Toast.makeText(context, "권한거절", Toast.LENGTH_SHORT).show()
-                        }
-
-                    })
-                    .setDeniedMessage("[설정] -> [권한]에서 권한 변경이 가능합니다.")
-                    .setDeniedCloseButtonText("닫기")
-                    .setGotoSettingButtonText("설정")
-                    .check()
-            }
-        }
 
     }//////////////onCreate
 

@@ -58,4 +58,6 @@ dependencies {
     //퍼미션 체크 쉽게하는 Library
     implementation 'io.github.ParkSangGwon:tedpermission-normal:3.3.0'
 
+    implementation "com.google.android.gms:play-services-location:20.0.0"
+
 }
