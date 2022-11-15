@@ -1,6 +1,7 @@
 package com.nsw2022.retrofitlibapp_ko
 
 import android.content.Context
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,8 +25,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 class HomeFragment: Fragment() {
 
     lateinit var binding:FragmentHomeBinding
-    lateinit var home_spinner:Spinner
-    lateinit var gu_arrays:Array<String>
+
 
 
 
@@ -42,13 +42,11 @@ class HomeFragment: Fragment() {
 
 /*
         더미테스트
-        items.add( RecyclerItem("도서관","강남구","서울시 강남구","2022-01-02","02-1234-5678") )
-        items.add( RecyclerItem("홍길동","동대문구","서울시 강남구","2022-01-02","02-1234-5678") )
-        items.add( RecyclerItem("글자수가몇개까지일까요제한을뒀답니다~","강서구","서울시 강남구","2022-01-02","02-1234-5678") )
-        items.add( RecyclerItem("짜파게티","강남구","서울시 강남구","2022-01-02","02-1234-5678") )
+        items.add( FavRecycelrItem("도서관","강남구","서울시 강남구","2022-01-02","02-1234-5678") )
+        items.add( FavRecycelrItem("홍길동","동대문구","서울시 강남구","2022-01-02","02-1234-5678") )
+        items.add( FavRecycelrItem("글자수가몇개까지일까요제한을뒀답니다~","강서구","서울시 강남구","2022-01-02","02-1234-5678") )
+        items.add( FavRecycelrItem("짜파게티","강남구","서울시 강남구","2022-01-02","02-1234-5678") )
 
- */
-/*
        더미테스트
        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_home)
        val adapter = RecyclerAdapter(requireContext(),items)
@@ -99,12 +97,12 @@ class HomeFragment: Fragment() {
                         var items:MutableList<Row> = mutableListOf() //빈 리스트.. 리사이클러뷰가 보여줄 데이터들..
 
                         apiReonse?.SeoulLibraryTimeInfo?.row?.forEach {
-                            Log.i("TAG", it.CODE_VALUE +" , " + gu)
+                            //Log.i("TAG", it.CODE_VALUE +" , " + gu)
                             if(it.CODE_VALUE == gu) items.add(it)
                         }
 
                         //Toast.makeText(requireContext(), "$gu", Toast.LENGTH_SHORT).show()
-                        Toast.makeText(requireContext(), "${apiReonse?.SeoulLibraryTimeInfo?.row?.size}\n${items.size}",
+                        Toast.makeText(requireContext(), "${items.size}",
                             Toast.LENGTH_SHORT).show()
 
                         binding.recyclerHome.adapter= RecyclerAdapter(requireContext(), items)

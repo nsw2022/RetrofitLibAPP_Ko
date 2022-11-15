@@ -1,6 +1,6 @@
 package com.nsw2022.retrofitlibapp_ko
 
-data class RecyclerItem constructor(
+data class FavRecycelrItem constructor(
     var LBRRY_NAME:String,
     var CODE_VALUE:String,
     var ADRES:String,
