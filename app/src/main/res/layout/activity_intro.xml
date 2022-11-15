@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".IntroActivity">
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:src="@drawable/we_library"
+        android:scaleType="centerCrop"/>
+    
+    <ImageView
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/kakao_login_large_wide"
+        android:adjustViewBounds="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_user_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rectangle"
+        android:layout_alignLeft="@id/btn_login"
+        android:layout_toLeftOf="@id/btn"
+        android:layout_above="@id/btn_login"
+        android:layout_marginBottom="13dp"
+        android:textColor="@color/black"
+        android:text="User Name"
+        android:padding="16dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_login"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:text="계속"
+        android:background="@drawable/bg_button_round"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:src="@drawable/profle"
+        android:layout_above="@id/tv_user_id"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"/>
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

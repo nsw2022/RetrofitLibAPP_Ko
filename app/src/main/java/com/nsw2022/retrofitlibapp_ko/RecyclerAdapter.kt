@@ -15,6 +15,8 @@ import android.widget.CompoundButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.internal.ContextUtils.getActivity
 import com.nsw2022.retrofitlibapp_ko.databinding.RecycelrItemBinding
@@ -43,22 +45,30 @@ class RecyclerAdapter constructor(var context: Context,var items:MutableList<Row
         holder.binding.tvTelLib.text=items[position].TEL_NO
         holder.binding.tvAddressLib.text=items[position].ADRES
 
+        holder.binding.tbFav.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(p0: View?) {
+                val intent = Intent(holder.itemView?.context,ReviewActivityFromHome::class.java)
 
-        holder.binding.tbFav.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener{
-            override fun onCheckedChanged(comButton: CompoundButton?, isCheck: Boolean) {
-                if (isCheck){
+                intent.putExtra("title",items[position].LBRRY_NAME)
+                intent.putExtra("gu",items[position].CODE_VALUE)
+                intent.putExtra("holiday",items[position].FDRM_CLOSE_DATE)
+                intent.putExtra("tel",items[position].TEL_NO)
 
-                    //val db: SQLiteDatabase = FavDB(context).writableDatabase
-
-
-
-                }else{
-
-
-                }
-
+                ContextCompat.startActivity(holder.itemView.context,intent,null)
             }
-        })//clickListener/////////////////////
+
+        })
+
+
+
+
+
+
+
+
+
+
+
     }//OnBindView//////////////////////////////////////////////////////////////////////////////////////////////////
 
     override fun getItemCount(): Int = items.size

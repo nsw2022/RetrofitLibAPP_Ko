@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="4dp"
     app:cardCornerRadius="8dp"
@@ -13,106 +13,69 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tv_user_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="이름"
+            android:text="작성자 : "
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:padding="8dp"/>
 
         <TextView
-            android:id="@+id/tv_name_lib"
+            android:id="@+id/tv_user_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tv_name"
             android:ellipsize="end"
             android:maxWidth="160dp"
             android:maxLines="1"
-            android:padding="8dp"
-            android:text="H강남3단지작은도서관"
+            android:paddingTop="8dp"
+            android:text="카카오 작성자 이름"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/tv_user_title"/>
 
         <TextView
-            android:id="@+id/tv_address"
+            android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_name"
-            android:padding="8dp"
-            android:text="주소"
-            android:textColor="@color/black"
+            android:layout_alignParentRight="true"
+            android:text="2022-11-15"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:padding="8dp"/>
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/tv_date"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="false"
+            android:src="@drawable/ic_arrow_down_24" />
 
         <TextView
-            android:id="@+id/tv_guaddress_lib"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_name_lib"
-            android:layout_toRightOf="@id/tv_address"
+            android:layout_below="@id/tv_user_id"
             android:padding="8dp"
-            android:text="강남구"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:text="도서관 이름"
+            android:textColor="@color/black"/>
 
-        <TextView
-            android:id="@+id/tv_address_lib"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_guaddress_lib"
-            android:layout_alignLeft="@+id/tv_guaddress_lib"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:padding="8dp"
-            android:text="서울특별시 강남구 자곡로3길 22 "
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_holiday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/tv_tel_lib"
-            android:padding="8dp"
-            android:text="공휴일"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_holiday_lib"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/tv_tel_lib"
-            android:layout_toRightOf="@+id/tv_holiday"
-            android:padding="8dp"
-            android:text="화,목요일, 주말"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_tel_lib"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:padding="8dp"
-            android:text="02-1234-5678"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
 
+        <!--
         <ImageView
             android:id="@+id/iv"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/ic_baseline_favorite_24"
             android:layout_alignParentRight="true"/>
+            -->
 
 
     </RelativeLayout>
