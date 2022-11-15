@@ -20,6 +20,10 @@ class ReviewActivityFromHome : AppCompatActivity() {
         binding.tvHolidayReview.text=intent.getStringExtra("holiday")
         binding.tvTelLibReview.text=intent.getStringExtra("tel")
 
+        binding.btnBackPress.setOnClickListener { onBackPressed() }
+
+        binding.btnSave.setOnClickListener { onBackPressed() }
+
 
 
     }//OnCrate
