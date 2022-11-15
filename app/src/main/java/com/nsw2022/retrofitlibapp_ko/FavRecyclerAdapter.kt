@@ -20,11 +20,6 @@ class FavRecyclerAdapter constructor(var context: Context,var items:MutableList<
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.binding.tvAddressLib.text=items[position].ADRES
-        holder.binding.tvGuaddressLib.text=items[position].CODE_VALUE
-        holder.binding.tvHolidayLib.text=items[position].FDRM_CLOSE_DATE
-        holder.binding.tvTelLib.text=items[position].TEL_NOL
-        holder.binding.tvNameLib.text=items[position].LBRRY_NAME
 
 
     }

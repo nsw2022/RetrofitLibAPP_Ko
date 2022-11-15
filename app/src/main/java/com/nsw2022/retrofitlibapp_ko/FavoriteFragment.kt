@@ -23,9 +23,7 @@ class FavoriteFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var items:MutableList<FavRecycelrItem> = mutableListOf()
 
-        binding.recyclerFav.adapter=FavRecyclerAdapter(requireContext(),items)
     }
 
 }

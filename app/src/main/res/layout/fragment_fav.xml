@@ -7,13 +7,4 @@
     android:padding="16dp">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_fav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"/>
-
-
 </LinearLayout>

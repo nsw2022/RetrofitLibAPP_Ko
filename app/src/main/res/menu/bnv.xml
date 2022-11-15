@@ -5,8 +5,8 @@
         android:title="HOME"
         android:icon="@drawable/ic_baseline_home_24"/>
     <item android:id="@+id/menu_bnv_favorite"
-        android:title="FAVORITE"
-        android:icon="@drawable/ic_baseline_favorite_24"/>
+        android:title="COMMENT"
+        android:icon="@drawable/bg_comment"/>
     <item android:id="@+id/menu_bnv_location"
         android:title="LOCATION"
         android:icon="@drawable/ic_baseline_location_on_24"/>

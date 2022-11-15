@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.nsw2022.retrofitlibapp_ko">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -16,21 +16,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RetrofitLibAPP_Ko"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".IntroActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ReviewActivityFromHome"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false">
 
-        <!-- 카카오 맵 네이티브 키 : 카카오 개발자 사이트에서 키 발급      -->
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="a42c523bacfc4150961ae4dd62ca9219"/>
-
+        </activity> <!-- 카카오 맵 네이티브 키 : 카카오 개발자 사이트에서 키 발급 -->
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="a42c523bacfc4150961ae4dd62ca9219" />
     </application>
 
 </manifest>
