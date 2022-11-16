@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.PermissionChecker
@@ -33,6 +34,9 @@ class LocationFragment: Fragment() {
 
     lateinit var binding:FragmentLocationBinding
     private val ACCESS_FINE_LOCATION = 1000 // Request Code
+    var aBoolean = true
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,23 +51,96 @@ class LocationFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-
-
         var mapView=MapView(requireContext())
-        var mapContainer=view.findViewById<ViewGroup>(R.id.map_container)
-        mapContainer.addView(mapView)
+
+        val permissionResult = TedPermission.create().setPermissions(
+            android.Manifest.permission.INTERNET,
+            android.Manifest.permission.ACCESS_FINE_LOCATION,
+            android.Manifest.permission.ACCESS_COARSE_LOCATION
+        ).setPermissionListener(object : PermissionListener{
+            override fun onPermissionGranted() {
+
+                binding.fabAdd.setOnClickListener(object : View.OnClickListener{
+                    override fun onClick(p0: View?) {
+                        if (aBoolean) {
+                            binding.fabUserLocation.show()
+                            binding.fabTwo.show()
+                            aBoolean=false
+                        }else{
+                            binding.fabUserLocation.hide()
+                            binding.fabTwo.hide()
+                            aBoolean=true
+                        }
+
+                    }
+
+                })
+
+
+                var mapContainer=view.findViewById<ViewGroup>(R.id.map_container)
+                mapContainer.addView(mapView)
+
+                var marker=MapPOIItem()
+
+                // 열린데이터광장 데이터 파싱
+                val retrofit: Retrofit = Retrofit.Builder()
+                    .baseUrl(SeoulOpenApi.DOMAIN)
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+
+                val retrofitService = retrofit.create(LibApiRetrofitService::class.java)
+
+                retrofitService.getAPILibDatas(SeoulOpenApi.KEY)
+                    .enqueue(object : Callback<LibApiItem>{
+                        override fun onResponse(
+                            call: Call<LibApiItem>,
+                            response: Response<LibApiItem>
+                        ) {
+                            val apiReonse: LibApiItem? = response.body()
+
+                            apiReonse?.SeoulLibraryTimeInfo?.row?.forEach {
+                                marker.itemName = "${it.LBRRY_NAME}\n${it.FDRM_CLOSE_DATE}"
+                                marker.mapPoint = MapPoint.mapPointWithGeoCoord(
+                                    it.XCNTS.toDouble(),
+                                    it.YDNTS.toDouble()
+                                )
+                                marker.markerType = MapPOIItem.MarkerType.RedPin
+                                marker.selectedMarkerType = MapPOIItem.MarkerType.YellowPin
+
+                                mapView.addPOIItem(marker)
+                            }
+                        }
+
+                        override fun onFailure(call: Call<LibApiItem>, t: Throwable) {
+                            AlertDialog.Builder(requireContext()).setMessage("${t.message}").create().show()
+                        }
+
+                    })
 
 
 
+            }
 
+            override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                        Toast.makeText(context, "권한거절", Toast.LENGTH_SHORT).show()
+            }
 
+        })
+            .setDeniedMessage("[설정] -> [권한]에서 권한 변경이 가능합니다.")
+            .setDeniedCloseButtonText("닫기")
+            .setGotoSettingButtonText("설정")
+            .check()
 
+        binding.fabUserLocation.setOnClickListener {
+            mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading
+        }
 
 
 
     }//////////////onCreate
+
+
 
 
 
