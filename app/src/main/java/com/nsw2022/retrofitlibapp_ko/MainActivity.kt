@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity() {
         //val db: SQLiteDatabase = FavDB(this).writableDatabase
 
 
+
+
         supportFragmentManager.beginTransaction().add(R.id.fragment_container, fragments[0]!!)
             .commit()
 
