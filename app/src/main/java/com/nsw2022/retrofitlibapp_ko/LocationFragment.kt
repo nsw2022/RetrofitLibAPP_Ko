@@ -1,9 +1,13 @@
 package com.nsw2022.retrofitlibapp_ko
 
 
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
 import android.content.Context.MODE_PRIVATE
+import android.content.pm.PackageManager
+import android.graphics.Color
+import android.location.Location
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +17,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.PermissionChecker
@@ -20,6 +26,7 @@ import androidx.fragment.app.Fragment
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 import com.nsw2022.retrofitlibapp_ko.databinding.FragmentLocationBinding
+import net.daum.mf.map.api.MapCircle
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
@@ -136,10 +143,49 @@ class LocationFragment: Fragment() {
             mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading
         }
 
+        binding.fabTwo.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(p0: View?) {
+
+                mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading
+                val locationManager:LocationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                if (ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        android.Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        android.Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    return
+                }
+                //위치정보 객체 참조변수
+                var location: Location? = null
+                if (locationManager!!.isProviderEnabled("gps")) {
+                    location = locationManager!!.getLastKnownLocation("gps")
+                } else if (locationManager!!.isProviderEnabled("network")) {
+                    location = locationManager!!.getLastKnownLocation("network")
+                }
+                if (location == null) {
+                    Toast.makeText(requireContext(), "Error 네트워크 GPS 확인요망", Toast.LENGTH_SHORT).show()
+                } else {
+                    // 위도,경도 얻어내기
+                    val latitude = location.latitude
+                    val longitude = location.longitude
+                    //Toast.makeText(requireContext(), "나는 위도$latitude\n나는 경도 $longitude", Toast.LENGTH_SHORT).show()
+                    val circle = MapCircle(MapPoint.mapPointWithGeoCoord(latitude,longitude),2000,
+                        Color.argb(128,255,0,0),//strokeColor
+                        Color.argb(128,0,255,0) //fillColor
+                    )
+                    mapView.addCircle(circle)
+                    Toast.makeText(requireContext(), "반경 2km 입니다.", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+        })
+
 
 
     }//////////////onCreate
-
 
 
 
