@@ -2,6 +2,7 @@ package com.nsw2022.retrofitlibapp_ko
 
 
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.app.ProgressDialog.show
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
 import android.content.Context.MODE_PRIVATE
@@ -49,46 +50,50 @@ class LocationFragment : Fragment() {
     var aBoolean = true
     var userCount: Int = 0
     var circleCount: Int = 0
+    lateinit var mapView : MapView
     var marker = MapPOIItem()
-    var itemListener = object : MapView.POIItemEventListener {
-        override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
-            Toast.makeText(requireContext(), "나는 아이템이 선택됐을때야!${p1?.itemName}", Toast.LENGTH_SHORT)
-                .show()
-            Log.d("ITEM", "${p1?.itemName}")
-        }
 
-        override fun onCalloutBalloonOfPOIItemTouched(
-            p0: MapView?,
-            p1: MapPOIItem?
-        ) {
-            Toast.makeText(requireContext(), "나는 벌룬? 선택됐을때야!${p1?.itemName}", Toast.LENGTH_SHORT)
-                .show()
-            Log.d("Ballo", "${p1?.itemName}")
-        }
 
-        override fun onCalloutBalloonOfPOIItemTouched(
-            p0: MapView?,
-            p1: MapPOIItem?,
-            p2: MapPOIItem.CalloutBalloonButtonType?
-        ) {
-            Toast.makeText(
-                requireContext(),
-                "벌룬인데 메소드가 하나 더 많아!{${p1?.itemName}}",
-                Toast.LENGTH_SHORT
-            ).show()
-            Log.d("SAME", "${p1?.itemName}")
-        }
-
-        override fun onDraggablePOIItemMoved(
-            p0: MapView?,
-            p1: MapPOIItem?,
-            p2: MapPoint?
-        ) {
-            Toast.makeText(requireContext(), "드래그라는거보니아닌듯${p1?.itemName}}", Toast.LENGTH_SHORT)
-                .show()
-            Log.d("SAME2", "${p1?.itemName}")
-        }
-    }
+    //val eventListener = MarkerEventListener(requireContext())
+//    var itemListener = object : MapView.POIItemEventListener {
+//        override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
+//            Toast.makeText(requireContext(), "나는 아이템이 선택됐을때야!${p1?.itemName}", Toast.LENGTH_SHORT)
+//                .show()
+//            Log.d("ITEM", "${p1?.itemName}")
+//        }
+//
+//        override fun onCalloutBalloonOfPOIItemTouched(
+//            p0: MapView?,
+//            p1: MapPOIItem?
+//        ) {
+//            Toast.makeText(requireContext(), "나는 벌룬? 선택됐을때야!${p1?.itemName}", Toast.LENGTH_SHORT)
+//                .show()
+//            Log.d("Ballo", "${p1?.itemName}")
+//        }
+//
+//        override fun onCalloutBalloonOfPOIItemTouched(
+//            p0: MapView?,
+//            p1: MapPOIItem?,
+//            p2: MapPOIItem.CalloutBalloonButtonType?
+//        ) {
+//            Toast.makeText(
+//                requireContext(),
+//                "벌룬인데 메소드가 하나 더 많아!{${p1?.itemName}}",
+//                Toast.LENGTH_SHORT
+//            ).show()
+//            Log.d("SAME", "${p1?.itemName}")
+//        }
+//
+//        override fun onDraggablePOIItemMoved(
+//            p0: MapView?,
+//            p1: MapPOIItem?,
+//            p2: MapPoint?
+//        ) {
+//            Toast.makeText(requireContext(), "드래그라는거보니아닌듯${p1?.itemName}}", Toast.LENGTH_SHORT)
+//                .show()
+//            Log.d("SAME2", "${p1?.itemName}")
+//        }
+//    }
 
 
     override fun onCreateView(
@@ -111,7 +116,7 @@ class LocationFragment : Fragment() {
         var mapContainer = view.findViewById<ViewGroup>(R.id.map_container)
         mapContainer.addView(mapView)
 
-        mapView.setPOIItemEventListener(itemListener)
+        //mapView.setPOIItemEventListener(    MarkerEventListener(requireContext())   )
 
         var marker = MapPOIItem()
 
@@ -156,6 +161,7 @@ class LocationFragment : Fragment() {
             })
 
         binding.fabUserLocation.setOnClickListener {
+            Toast.makeText(requireContext(), "클릭됨$userCount", Toast.LENGTH_SHORT).show()
 
             when (userCount) {
                 0 -> {
@@ -178,6 +184,7 @@ class LocationFragment : Fragment() {
 
         binding.fabTwo.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
+                Toast.makeText(requireContext(), "$circleCount", Toast.LENGTH_SHORT).show()
                 when (circleCount) {
                     0 -> {
                         mapView.currentLocationTrackingMode =
@@ -245,7 +252,46 @@ class LocationFragment : Fragment() {
         }
     }
 
+    class MarkerEventListener(val context: Context):MapView.POIItemEventListener{
+        override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
+            Toast.makeText(context, "나는 아이템이 선택됐을때야!${p1?.itemName}", Toast.LENGTH_SHORT)
+                .show()
+            Log.d("ITEM", "${p1?.itemName}")
+        }
 
+        override fun onCalloutBalloonOfPOIItemTouched(
+            p0: MapView?,
+            p1: MapPOIItem?
+        ) {
+            Toast.makeText(context, "나는 벌룬? 선택됐을때야!${p1?.itemName}", Toast.LENGTH_SHORT)
+                .show()
+            Log.d("Ballo", "${p1?.itemName}")
+        }
+
+        override fun onCalloutBalloonOfPOIItemTouched(
+            p0: MapView?,
+            p1: MapPOIItem?,
+            p2: MapPOIItem.CalloutBalloonButtonType?
+        ) {
+            Toast.makeText(
+                context,
+                "벌룬인데 메소드가 하나 더 많아!{${p1?.itemName}}",
+                Toast.LENGTH_SHORT
+            ).show()
+            Log.d("SAME", "${p1?.itemName}")
+        }
+
+        override fun onDraggablePOIItemMoved(
+            p0: MapView?,
+            p1: MapPOIItem?,
+            p2: MapPoint?
+        ) {
+            Toast.makeText(context, "드래그라는거보니아닌듯${p1?.itemName}}", Toast.LENGTH_SHORT)
+                .show()
+            Log.d("SAME2", "${p1?.itemName}")
+        }
+
+    }
     /*
         // 중심점 변경 + 줌 레벨 변경
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(33.41, 126.52), 8, true)
