@@ -12,15 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_user_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="작성자 : "
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:padding="8dp"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_user"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/profle"/>
 
         <TextView
             android:id="@+id/tv_user_id"
@@ -30,11 +26,12 @@
             android:maxWidth="160dp"
             android:maxLines="1"
             android:paddingTop="8dp"
-            android:text="카카오 작성자 이름"
+            android:text="홍 길동"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:layout_toRightOf="@id/tv_user_title"/>
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/civ_user"/>
 
         <TextView
             android:id="@+id/tv_date"
@@ -46,6 +43,7 @@
             android:padding="8dp"/>
 
         <ImageButton
+            android:id="@+id/iv_btn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_below="@id/tv_date"
@@ -60,9 +58,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_user_id"
-            android:padding="8dp"
+            android:paddingTop="16dp"
             android:text="도서관 이름"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
 
 
 
