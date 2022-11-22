@@ -161,7 +161,6 @@ class LocationFragment : Fragment() {
             })
 
         binding.fabUserLocation.setOnClickListener {
-            Toast.makeText(requireContext(), "클릭됨$userCount", Toast.LENGTH_SHORT).show()
 
             when (userCount) {
                 0 -> {
@@ -184,7 +183,7 @@ class LocationFragment : Fragment() {
 
         binding.fabTwo.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
-                Toast.makeText(requireContext(), "$circleCount", Toast.LENGTH_SHORT).show()
+
                 when (circleCount) {
                     0 -> {
                         mapView.currentLocationTrackingMode =
@@ -236,7 +235,6 @@ class LocationFragment : Fragment() {
                 }//when
             }
         })//clickListener
-
 
     }//////////////onCreate
 
