@@ -59,16 +59,6 @@ class RecyclerAdapter constructor(var context: Context,var items:MutableList<Row
 
         })
 
-
-
-
-
-
-
-
-
-
-
     }//OnBindView//////////////////////////////////////////////////////////////////////////////////////////////////
 
     override fun getItemCount(): Int = items.size

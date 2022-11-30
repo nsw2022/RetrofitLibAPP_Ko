@@ -69,6 +69,10 @@ class ReviewActivityFromHome : AppCompatActivity() {
         var dataPart:MutableMap<String, String> = mutableMapOf()
         dataPart["title"] = title
         dataPart["user_name"] = name!!
+        dataPart["msg"] = libContent
+        dataPart["img"] = profile!!
+
+
         val call=retrofitService.postDataToServer( dataPart )
 
         call.enqueue(object :Callback<String>{
@@ -76,8 +80,6 @@ class ReviewActivityFromHome : AppCompatActivity() {
                 response.body()?.let{
                     Log.d("MSGG",it)
                 }
-
-
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
