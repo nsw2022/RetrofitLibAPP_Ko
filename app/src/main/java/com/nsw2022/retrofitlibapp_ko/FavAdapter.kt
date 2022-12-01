@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nsw2022.retrofitlibapp_ko.databinding.RecyclerFavItemBinding
 
-class FavAdapter constructor(var context: Context, var itmes:MutableList<FavClassItems>):
+class FavAdapter constructor(var context: Context, var itmes:MutableList<ReviewItem>):
     RecyclerView.Adapter<FavAdapter.VH>() {
 
     inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView) {
