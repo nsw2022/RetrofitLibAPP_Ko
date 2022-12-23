@@ -64,7 +64,7 @@ class IntroActivity : AppCompatActivity() {
             }
 
             override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
-                Toast.makeText(this@IntroActivity, "권하 거절", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@IntroActivity, "권한 거절", Toast.LENGTH_SHORT).show()
             }
 
 
