@@ -10,7 +10,7 @@ Service<br>
 BroadcastReceiver<br>
 GPS 상태 감지 등 디바이스 상태 변화 반영.<br>
 Content Provider<br>
-이번 프로젝트에서는 반영을 하지 못하였지만 기회가 된다면 특정 데이터를 다른 앱과 공유하도록 구성.<br>
+갤러리 앱에서 사진을 가져와 앱 내에 표시.<br>
 2. 백엔드 및 서버 통신<br>
 닷홈(Dothome) 웹 호스팅을 활용하여 APM 환경 구축.<br>
 PHP를 이용한 데이터베이스(MySQL) 통신 구현.<br>
